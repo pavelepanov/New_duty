@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from fastapi_users import fastapi_users, FastAPIUsers
+from starlette.staticfiles import StaticFiles
 
 from auth.auth import auth_backend
-from auth.databasesq import User
-from auth.manager import get_user_manager
 from auth.schemas import UserRead, UserCreate
 from defection.router import router as router_duty
+from pages.router import router as router_pages
 
 from auth.permissions import fastapi_users
 
@@ -13,8 +13,10 @@ app = FastAPI(
     title="New defection"
 )
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(router_duty)
+app.include_router(router_pages)
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),
