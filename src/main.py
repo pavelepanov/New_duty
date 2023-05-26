@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
-from duty.router import router as router_duty
+from defection.router import router as router_duty
 
 app = FastAPI(
-    title="New duty"
+    title="New defection"
 )
 
 app.include_router(router_duty)
