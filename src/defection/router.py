@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from defection.repository import RepositoryDefection
-from defection.shemas import Defection
+from defection.schemas import Defection
 from student.repository import RepositoryStudent, RepositoryGrade
 
 router = APIRouter(
