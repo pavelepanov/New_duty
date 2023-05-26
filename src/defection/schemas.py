@@ -3,7 +3,7 @@ import datetime
 
 
 class Defection(BaseModel):
-    defection_time: datetime.timedelta
+    defection_time: datetime.date
     id: int
     reason: str
     defection_type_id: int

@@ -1,8 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from defection.repository import RepositoryDefection
 from defection.schemas import Defection
-from student.repository import RepositoryStudent, RepositoryGrade
+from student.repository import RepositoryStudent
+from auth.permissions import current_superuser
+from auth.databasesq import User
 
 router = APIRouter(
     prefix="/defection",
@@ -10,8 +12,8 @@ router = APIRouter(
 )
 
 
-@router.post("add/defection")
-async def post_defection(name: str, surname: str, grade: int, letter: str, defection_type: str, reason: str):
+@router.post("add/defection", response_model=Defection)
+async def post_defection(name: str, surname: str, grade: int, letter: str, defection_type: str, reason: str, user: User = Depends(current_superuser)):
     """
     :param name: name of student
     :param surname: surname of student

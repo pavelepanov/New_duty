@@ -1,12 +1,12 @@
-import uuid
 from typing import Optional
 
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
 
 from auth.databasesq import User, get_user_db
+from config import COOKIE_SECRET
 
-SECRET = "SECRET"
+SECRET = COOKIE_SECRET
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
