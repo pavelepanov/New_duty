@@ -2,7 +2,7 @@ import datetime
 
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 
-from src.database import Base
+from database import Base
 
 
 class Defection(Base):
@@ -21,11 +21,11 @@ class Student(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     surname = Column(String(50), nullable=False)
-    group_id = Column(Integer, ForeignKey("group.id"), nullable=False)
+    group_id = Column(Integer, ForeignKey("grade.id"), nullable=False)
 
 
-class Group(Base):
-    __tablename__ = "group"
+class Grade(Base):
+    __tablename__ = "grade"
 
     id = Column(Integer, primary_key=True)
     grade = Column(Integer, nullable=False)
