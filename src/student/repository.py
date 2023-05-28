@@ -23,6 +23,14 @@ class RepositoryGrade(BaseRepo):
 
             return result.scalars().one()
 
+    @classmethod
+    async def get_info_by_group_id(cls, group_id: int):
+        async with async_session_maker() as session:
+            result = await session.execute(select(Grade).where(
+                Grade.id == group_id
+            ))
+            return result.scalars().all()
+
 
 class RepositoryStudent(BaseRepo):
     @classmethod
@@ -57,3 +65,11 @@ class RepositoryStudent(BaseRepo):
                 select(Student.id))
 
             return result.scalars().all()
+
+    @classmethod
+    async def get_student_info_by_id(cls, student_id: int):
+        async with async_session_maker() as session:
+            result = await session.execute(select(Student).where(
+                Student.id == student_id
+            ))
+            return result.scalars().first()

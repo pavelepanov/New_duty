@@ -35,7 +35,7 @@ async def post_defection(name: str, surname: str, grade: int, letter: str, defec
 
 
 @router.get("/get/defection/no_card")
-async def get_defection_no_card_all():
+async def get_defection_no_card_all(user: User = Depends(current_superuser)):
     count_students_defection = {}
     students_id = await RepositoryStudent.get_all_student()
     for id in students_id:
@@ -45,7 +45,7 @@ async def get_defection_no_card_all():
 
 
 @router.get("/get/defection/being_late")
-async def get_defection_no_card_all():
+async def get_defection_being_late_all(user: User = Depends(current_superuser)):
     count_students_defection = {}
     students_id = await RepositoryStudent.get_all_student()
     for id in students_id:
@@ -55,7 +55,7 @@ async def get_defection_no_card_all():
 
 
 @router.get("/get/defection/appearance")
-async def get_defection_no_card_all():
+async def get_defection_appearance_all(user: User = Depends(current_superuser)):
     count_students_defection = {}
     students_id = await RepositoryStudent.get_all_student()
     for id in students_id:
