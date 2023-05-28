@@ -49,3 +49,11 @@ class RepositoryStudent(BaseRepo):
 
                 await session.commit()
                 return result.scalars().one()
+
+    @classmethod
+    async def get_all_student(cls):
+        async with async_session_maker() as session:
+            result = await session.execute(
+                select(Student.id))
+
+            return result.scalars().all()
