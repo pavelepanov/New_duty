@@ -1,13 +1,16 @@
+from typing import Tuple
+
 from fastapi import APIRouter, Depends, HTTPException, Request
+from starlette.responses import Response
+
 from auth.auth import auth_backend
 from fastapi_users import BaseUserManager, models
-from fastapi_users.authentication import backend, Strategy
+from fastapi_users.authentication import Strategy
 from fastapi_users.router import ErrorCode
 from starlette import status
 
 from auth.auth import auth_backend
-from auth.manager import get_user_manager
-from auth.permissions import fastapi_users
+
 from fastapi.security import OAuth2PasswordRequestForm
 
 from auth.manager import get_user_manager
@@ -39,4 +42,10 @@ async def login(
         )
     response = await auth_backend.login(strategy, user)
     await user_manager.on_after_login(user, request, response)
+    return response
+
+
+@router.get("/logout2")
+async def logout2(response: Response):
+    response.delete_cookie("duty")
     return response
