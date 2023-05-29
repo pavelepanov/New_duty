@@ -17,6 +17,8 @@ from auth.permissions import current_superuser
 
 from xlsx.router import get_xlsx
 
+from tasks.tasks import send_email_report_dashboard
+
 router = APIRouter(
     prefix="/pages",
     tags=["pages"]
@@ -88,7 +90,11 @@ async def xlsx_form(request: Request):
 @router.post("/mail")
 async def post_defection_form(request: Request, mail: str = Form(...)):
     result = await get_xlsx()
+    print("-"*8)
     print(mail)
+    print(result)
+    print("-"*8)
+    send_email_report_dashboard.delay(mail, result)
     return templates.TemplateResponse("base.html", {"request": request, "result": result})
 
 

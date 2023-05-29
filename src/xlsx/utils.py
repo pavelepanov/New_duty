@@ -7,9 +7,10 @@ from student.repository import RepositoryStudent, RepositoryGrade
 
 
 async def get_table_no_card():
+    name = f'students{datetime.now()}_no_card.xlsx'
     dict_grade = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0}
     # открываем новый файл на запись
-    workbook = xlsxwriter.Workbook(f'students{datetime.now()}_no_card.xlsx')
+    workbook = xlsxwriter.Workbook(name)
     # создаем там "лист"
     worksheet = workbook.add_worksheet()
     # Шапка, где классы
@@ -31,15 +32,16 @@ async def get_table_no_card():
                         grade_student - 1,
                         "%s %s %d" % (info_about_student.name, info_about_student.surname, quantity))
         dict_grade[grade_student] += 1
-        print(dict_grade)
     # сохраняем и закрываем
     workbook.close()
+    return name
 
 
 async def get_table_being_late():
+    name = f'students{datetime.now()}_being_late.xlsx'
     dict_grade = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0}
     # открываем новый файл на запись
-    workbook = xlsxwriter.Workbook(f'students{datetime.now()}_being_late.xlsx')
+    workbook = xlsxwriter.Workbook(name)
     # создаем там "лист"
     worksheet = workbook.add_worksheet()
     # Шапка, где классы
@@ -62,15 +64,16 @@ async def get_table_being_late():
                         grade_student - 1,
                         "%s %s %d" % (info_about_student.name, info_about_student.surname, quantity))
         dict_grade[grade_student] += 1
-        print(dict_grade)
     # сохраняем и закрываем
     workbook.close()
+    return name
 
 
 async def get_table_appearance():
+    name = f'students{datetime.now()}_appearance.xlsx'
     dict_grade = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0}
     # открываем новый файл на запись
-    workbook = xlsxwriter.Workbook(f'students{datetime.now()}_appearance.xlsx')
+    workbook = xlsxwriter.Workbook(name)
     # создаем там "лист"
     worksheet = workbook.add_worksheet()
     # Шапка, где классы
@@ -94,6 +97,6 @@ async def get_table_appearance():
                         grade_student - 1,
                         "%s %s %d" % (info_about_student.name, info_about_student.surname, quantity))
         dict_grade[grade_student] += 1
-        print(dict_grade)
     # сохраняем и закрываем
     workbook.close()
+    return name
