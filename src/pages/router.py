@@ -15,6 +15,8 @@ from defection.router import post_defection
 from auth.router import login, logout2
 from auth.permissions import current_superuser
 
+from xlsx.router import get_xlsx
+
 router = APIRouter(
     prefix="/pages",
     tags=["pages"]
@@ -72,7 +74,23 @@ async def post_account(request: Request,
 @router.get("/logout")
 async def logout(request: Request, response: Response):
     response.delete_cookie(key="duty")
-    #return templates.TemplateResponse("account_logout.html", {"request": request, "response": response})
+
+
+@router.get("/mail")
+async def xlsx_form(request: Request):
+    cookie = request.cookies.get("duty")
+    if cookie:
+        return templates.TemplateResponse("xlsx_get.html", {"request": request})
+    else:
+        return templates.TemplateResponse("no_account.html", {"request": request})
+
+
+@router.post("/mail")
+async def post_defection_form(request: Request, mail: str = Form(...)):
+    result = await get_xlsx()
+    print(mail)
+    return templates.TemplateResponse("base.html", {"request": request, "result": result})
+
 
 
 

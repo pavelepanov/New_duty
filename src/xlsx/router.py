@@ -8,9 +8,10 @@ router = APIRouter(
 )
 
 
-@router.get("/xlsx")
+@router.get("/xlsx/get")
 async def get_xlsx():
     no_card = await get_table_no_card()
     being_late = await get_table_being_late()
     appearance = await get_table_appearance()
     return no_card, being_late, appearance
+
